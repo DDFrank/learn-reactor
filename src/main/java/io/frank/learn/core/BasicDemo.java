@@ -1,4 +1,4 @@
-package io.frank.learn.basic;
+package io.frank.learn.core;
 
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.BaseSubscriber;

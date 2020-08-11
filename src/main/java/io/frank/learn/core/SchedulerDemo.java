@@ -1,6 +1,5 @@
-package io.frank.learn.basic;
+package io.frank.learn.core;
 
-import org.omg.PortableServer.THREAD_POLICY_ID;
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Scheduler;
@@ -16,18 +15,18 @@ public class SchedulerDemo {
         final Flux<String> flux = Flux
                 .range(1, 2)
                 .map(i -> {
-                    System.out.println("first map happens:" + Thread.currentThread().getName());
+                    System.out.println("first map happens " + Thread.currentThread().getName());
                     return 10 + i;
                 })
                 .publishOn(s)
                 .map(i -> {
-                    System.out.println("second map happens" + Thread.currentThread().getName());
+                    System.out.println("second map happens " + Thread.currentThread().getName());
                     return "value " + i;
                 });
 
         new Thread(() -> {
             Disposable d = flux.subscribe(
-                    i -> System.out.println("subscription happens" + Thread.currentThread().getName()),
+                    i -> System.out.println("subscription happens " + Thread.currentThread().getName()),
                     e -> e.printStackTrace(),
                     () -> System.out.println("complete")
             );
